@@ -31,10 +31,19 @@
     'use strict';
 
     ///////////////////////////
-    // Put your code here!
+    function LivingThing(iname, ihealth) {
+      this.name = iname;
+      this.health = ihealth;
+    }
+
+    let Rat = new LivingThing("Rat", 5);
+    let Goblin = new LivingThing("Goblin", 30);
+    let Ogre = new LivingThing("Ogre", 80);
+    let monsters = [Rat, Goblin, Ogre];
+
     ///////////////////////////
 
-    
+
     //The code below should work when you are done
     console.log("Monsters!");
 
@@ -42,7 +51,7 @@
     //not compatable before IE edge
     //@see http://www.benmvp.com/learning-es6-for-of-loop/
     //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
-    console.log("ES6 for...in");
+    console.log("ES6 for...of");
     for (let monster of monsters) {
         console.log(monster.name + ": " + monster.health);
     }
@@ -58,7 +67,3 @@
     }
 
 })();
-    
-
-
-    

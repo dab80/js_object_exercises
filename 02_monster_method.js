@@ -7,40 +7,50 @@
  *
  */
 
-(function(){
+(function() {
 
-    //@see https://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it
-    'use strict';
+  //@see https://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it
+  'use strict';
 
-    ///////////////////////////
-    // Put your code here!
-    ///////////////////////////
+  ///////////////////////////
+  // Put your code here!
 
-    
-    //The code below should work when you are done
-    console.log("Are the monsters alive?");
+  function LivingThing(iname, ihealth) {
+    this.name = iname;
+    this.health = ihealth;
 
-    //for...of loop supported in ES6
-    //not compatable before IE edge
-    //@see http://www.benmvp.com/learning-es6-for-of-loop/
-    //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
-    console.log("ES6 for...in");
-    for (let monster of monsters) {
-        console.log(monster.name + " is " + (monster.isAlive() ? "alive" : "dead") );
+    this.isAlive = function() {
+      return (this.health > 0);
     }
+  }
 
-    //just a spacer
-    console.log("===================");
+  let Rat = new LivingThing("Rat", 5);
+  let Goblin = new LivingThing("Goblin", 30);
+  let Ogre = new LivingThing("Ogre", 80);
+  let monsters = [Rat, Goblin, Ogre];
+  ///////////////////////////
 
-    //for loop loop supported before ES6
-    //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
-    console.log("for loop for support before ES6");
-    for (let i=0; i < monsters.length; i++) {
-        console.log(monsters[i].name + " is " + (monsters[i].isAlive() ? "alive" : "dead") );
-    }
+
+  //The code below should work when you are done
+  console.log("Are the monsters alive?");
+
+  //for...of loop supported in ES6
+  //not compatable before IE edge
+  //@see http://www.benmvp.com/learning-es6-for-of-loop/
+  //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+  console.log("ES6 for...in");
+  for (let monster of monsters) {
+    console.log(monster.name + " is " + (monster.isAlive() ? "alive" : "dead"));
+  }
+
+  //just a spacer
+  console.log("===================");
+
+  //for loop loop supported before ES6
+  //@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
+  console.log("for loop for support before ES6");
+  for (let i = 0; i < monsters.length; i++) {
+    console.log(monsters[i].name + " is " + (monsters[i].isAlive() ? "alive" : "dead"));
+  }
 
 })();
-    
-
-
-    

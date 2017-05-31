@@ -32,29 +32,84 @@
  */
 
 
- (function(){
-    //@see https://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it
-    'use strict';
+(function() {
+  //@see https://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it
+  'use strict';
 
-    ///////////////////////////
-    // Put your code here!
-    ///////////////////////////
+  ///////////////////////////
+  function LivingThing(iname, ihealth) {
+    var name = iname;
+    var health = ihealth;
 
-    
-
-    //The code below should work when you are done
-    console.log("A hero emerges!");
-
-    console.log("The noble " + hero.getName() + " has vowed to defeat the monsters and save the realm");
-    console.log("Will they be victorious?");
-
-    hero.fight(monsters);
-
-    if (hero.isAlive()) {
-        console.log("The hero, " + hero.getName() + ", prevailed!");
+    this.getName = function() {
+      return name;
     }
-    else {
-        console.log(hero.getName() + " was bested by the monsters. We are doomed");
+    this.getHealth = function() {
+      return health;
     }
+    this.setHealth = function(x) {
+      health = x;
+    }
+    this.isAlive = function() {
+      return (health > 0);
+    }
+  }
+
+  function Hero(iname, ihealth) {
+    LivingThing.call(this, iname, ihealth);
+
+    this.attack = function(living_thing) {
+
+      // * 1. Reduce the LivingThing object's health by a random value between 0 and 10.
+      let random_num_lt = Math.floor(Math.random() * 10);
+      living_thing.setHealth(living_thing.getHealth() - random_num_lt);
+      // * 2. Reduce the hero's health by a random value between 0 and 10.
+      let random_num_hero = Math.floor(Math.random() * 10);
+      this.setHealth(this.getHealth() - random_num_hero);
+      // * 3. Print out how much damage the monster and hero did to each other.
+      console.log("############################################");
+      console.log("Hero attacked " + living_thing.getName());
+      console.log("Hero declined by " + random_num_hero);
+      console.log(living_thing.getName() + " declined by " + random_num_lt);
+    } //end of attack function
+
+    //   Give the Hero object another method named "fight" that takes as a parameter an array of LivingThing objects
+    this.fight = function(lt_array) {
+      //  *  - For each LivingThing object in the array, call the "attack" method so the hero can attack the monster.
+      for (let i = 0; i < lt_array.length; i++) {
+        //  *     - But, don't attack if the LivingThing is already dead!
+        while (this.getHealth() > 0 && lt_array[i].getHealth() > 0) {
+          this.attack(lt_array[i]);
+        }
+        if (this.getHealth() <= 0 || lt_array[lt_array.length - 1] <= 0) {
+          return;
+          console.log("############################################");
+        }
+      } //end of for loop
+      //  *  - Repeat the process until all the monsters or the hero is dead.
+
+    } //end of fight function
+  }
+
+  let Rat = new LivingThing("Rat", 5);
+  let Goblin = new LivingThing("Goblin", 30);
+  let Ogre = new LivingThing("Ogre", 80);
+  let monsters = [Rat, Goblin, Ogre];
+  let hero = new Hero("Eric", 100);
+  ///////////////////////////
+
+  //The code below should work when you are done
+  console.log("A hero emerges!");
+
+  console.log("The noble " + hero.getName() + " has vowed to defeat the monsters and save the realm");
+  console.log("Will they be victorious?");
+
+  hero.fight(monsters);
+
+  if (hero.isAlive()) {
+    console.log("The hero, " + hero.getName() + ", prevailed!");
+  } else {
+    console.log(hero.getName() + " was bested by the monsters. We are doomed");
+  }
 
 })();
